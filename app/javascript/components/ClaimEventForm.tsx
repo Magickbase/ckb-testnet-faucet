@@ -64,6 +64,7 @@ const ClaimEventForm: React.FC<ClaimEventFormProps> = ({
             name="amount"
             type="radio"
             value="10000"
+            defaultChecked
             onChange={handleChange}
             id={`ten_thousand_radio`}
           />

@@ -6,6 +6,7 @@ import { Container, Row, Col, FormControl, Form } from "react-bootstrap";
 import CKbIcon from "../images/ckb-n.png";
 import { context } from "../utils/util";
 import useSWR from "swr";
+import { useSetState } from "react-use";
 
 const Welcome: React.FC<WelcomeProps> = ({
   claimEvents,
@@ -14,14 +15,16 @@ const Welcome: React.FC<WelcomeProps> = ({
   aggronExplorerHost
 }) => {
   const addressHash = useRef("");
-  const amount = useRef("");
   const targetAddress = useRef("");
   const tempClaimEvents = useRef<Array<ClaimEventPresenter>>([]);
   const claimEventPresenters = claimEvents.data.map(event => {
     return event.attributes;
   });
-  const [state, setState] = useState({
+  const [state, setState] = useSetState({
     claimEvents: claimEventPresenters,
+
+    /** The amount(capacity) of CKB from faucet */
+    claimAmount: 10000,
     formError: "",
     officialAccount: {
       addressHash: officialAccount.addressHash,
@@ -45,7 +48,6 @@ const Welcome: React.FC<WelcomeProps> = ({
       .then(response => {
         if (addressHash.current != "") {
           setState({
-            ...state,
             officialAccount: response.data.officialAccount,
             claimEvents: response.data.claimEvents.data.map(
               (event: ResponseData) => {
@@ -56,7 +58,6 @@ const Welcome: React.FC<WelcomeProps> = ({
           })
         } else {
           setState({
-            ...state,
             officialAccount: response.data.officialAccount,
             claimEvents: response.data.claimEvents.data.map(
               (event: ResponseData) => {
@@ -84,10 +85,7 @@ const Welcome: React.FC<WelcomeProps> = ({
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (
     event: React.FormEvent<HTMLInputElement>
   ) => {
-    const target = event.target as HTMLInputElement;
-    amount.current = target.value;
-
-    event.preventDefault();
+    setState({ claimAmount: parseInt((event.target as HTMLInputElement).value) })
   };
 
   const handleInput: React.ChangeEventHandler<HTMLInputElement> = (
@@ -133,7 +131,7 @@ const Welcome: React.FC<WelcomeProps> = ({
     axios({
       method: "POST",
       url: "/claim_events",
-      data: { claim_event: { address_hash: addressHash.current, amount: amount.current } },
+      data: { claim_event: { address_hash: addressHash.current, amount: /* TODO: why the server receives this as a string, not a number? */ state.claimAmount.toString() } },
       headers: {
         "X-CSRF-Token": csrfToken
       }
