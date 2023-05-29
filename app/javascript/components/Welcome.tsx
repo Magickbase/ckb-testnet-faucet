@@ -189,14 +189,10 @@ const Welcome: React.FC<WelcomeProps> = ({
 
   return (
     <context.Provider value={aggronExplorerHost}>
-      <React.Fragment>
+      <>
         <Container className="form-container" fluid>
           <Row className="justify-content-center align-items-center">
             <Col
-              xs="10"
-              md="8"
-              lg="6"
-              xl="5"
               className="align-self-center justify-content-center img-container"
             >
               <img src={CKbIcon} alt="" />
@@ -221,7 +217,7 @@ const Welcome: React.FC<WelcomeProps> = ({
               xl="5"
               className="justify-content-center content-container"
             >
-              <p>Every address can claim a fixed amount of 300,000 CKB in a month. The claimable amount will update on the 1st of every month.</p>
+              <p>Every address can claim a fixed amount of 300,000 CKB in a month. The claimable amount will monthly update on the first day when you claim on this site.</p>
             </Col>
           </Row>
           <Row className="justify-content-center align-items-center">
@@ -229,8 +225,9 @@ const Welcome: React.FC<WelcomeProps> = ({
               xs="10"
               md="8"
               lg="6"
-              xl="4"
-              className=" justify-content-center align-self-center"
+              xl="6"
+              className="justify-content-center align-self-center"
+              style={{ maxWidth: 918 }}
             >
               <ClaimEventForm
                 addressHash={addressHash.current}
@@ -327,7 +324,7 @@ const Welcome: React.FC<WelcomeProps> = ({
             )}
           </Container>
         )}
-      </React.Fragment>
+      </>
     </context.Provider>
   );
 };
