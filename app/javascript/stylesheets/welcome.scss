@@ -1,22 +1,120 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+$form-primary-color: #9A2CEC;
+
+.flex-basis-content {
+  flex-basis: content;
+}
 
 .form-container {
   background-image: url(../images/bg.jpg);
   background-position: center center;
   background-size: cover;
-  padding-top: 92px;
+  height: 648px;
 
-  input.form-control {
-    outline-style: none;
-    box-shadow: none;
-    border-color: #f8f9fa;
+  .logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 32px;
   }
 
-  button.btn-outline-light:hover {
-    background-color: #d4d4d4;
+  .heading {
+  font-style: normal;
+font-weight: 500;
+font-size: 40px;
+line-height: 48px;
+margin-bottom: 16px;
   }
+
+  .desc {
+    color: #cccccc;
+    font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+box-sizing: content-box;
+  }
+}
+
+.claim-form {
+  margin-top: 44px;
+  width: 100%;
+  max-width: 702px;
+
+  label[for="amount"],label[for="addressHash"] {
+    flex-basis: 72px;
+    flex-shrink: 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    margin: 8px 0px;
+    margin-right: 16px;
+    display: inline-flex;
+    justify-content: flex-end;
+
+  }
+  label.form-check-label {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .address-hash-container {
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .amount-container {
+    margin-top: 16px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .remaining-container, .remaining-container-sm {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+      color: #cccccc;
+      flex-basis: content;
+      display: inline-flex;
+      align-items: center;
+      padding: 0;
+  }
+
+
+  button[type="submit"] {
+    margin-top: 40px;
+    margin-bottom: 24px;
+  background: $form-primary-color;
+  border-color: $form-primary-color;
+  width: 120px;
+  height: 40px;
+}
+
+.remaining-container-sm {
+  display: none;
+}
+
+@media only screen and (max-width:568px) {
+  label[for="amount"],label[for="addressHash"] {
+    flex-basis: 100%;
+    justify-content: flex-start;
+  }
+
+  input[name="addressHash"],.radio-items {
+    max-width: unset;
+  }
+
+  .remaining-container {
+    display: none;
+  }
+  .remaining-container-sm {
+    display: inline-flex;
+    flex-basis: content;
+  }
+}
 }
 
 .img-container {
@@ -65,38 +163,6 @@ form div.invalid-feedback {
   margin-top: 10px;
 }
 
-.claim-event-list-container,
-.empty-records-container,
-.search-empty-records-container {
-  margin-top: 20px;
-  min-height: 620px;
-
-  @media only screen and (max-height: 1024px) {
-    min-height: 263px;
-  }
-
-  @media only screen and (max-width: 700px) {
-    h2 {
-      font-size: 1.5rem;
-    }
-  }
-}
-
-.search-empty-records-container {
-  border: 1px dashed #baba;
-}
-
-div.empty-records-container,
-.search-empty-records-container {
-  h2 {
-    color: #bababa;
-  }
-
-  .text-center {
-    min-width: 200px;
-  }
-}
-
 #searchClear {
   position: absolute;
   right: 29px;
@@ -115,10 +181,13 @@ div.empty-records-container,
 }
 
 
-#claim_button {
-  background: #9A2CEC;
+input[type="radio"] {
+  accent-color: $form-primary-color;
 }
 
-input[type="radio"] {
-  accent-color: #9A2CEC;
+.claim-event-list-container {
+  max-width: 880px;
+  display: flex;
+  flex-direction: column;
 }
+

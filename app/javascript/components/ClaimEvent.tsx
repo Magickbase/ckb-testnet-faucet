@@ -6,12 +6,12 @@ import {
   Col,
   Badge,
   Tooltip,
-  OverlayTrigger
+  OverlayTrigger,
 } from "react-bootstrap";
-import { parseSimpleDate, formatHash, context } from "../utils/util";
+import { parseSimpleDate, formatHash, serverContext } from "../utils/util";
 
 const ClaimEvent: React.FC<ClaimEventProps> = ({ claimEvent }) => {
-  const aggronExplorerHost = useContext(context);
+  const { aggronExplorerHost } = useContext(serverContext);
   const explorer_address_url = aggronExplorerHost + "/address/";
   const explorer_transaction_url = aggronExplorerHost + "/transaction/";
   return (
@@ -77,7 +77,13 @@ const ClaimEvent: React.FC<ClaimEventProps> = ({ claimEvent }) => {
           <Row>
             <Col>
               <Badge
-                variant={claimEvent.status == "pending" ? "warning" : (claimEvent.status == "processed" ? "success" : "danger")}
+                variant={
+                  claimEvent.status == "pending"
+                    ? "warning"
+                    : claimEvent.status == "processed"
+                      ? "success"
+                      : "danger"
+                }
                 className="event-status"
               >
                 {claimEvent.status}

@@ -26,7 +26,7 @@ declare namespace State {
 
   export interface userAccount {
     addressHash: string;
-    remaining: string | null;
+    remaining: number | null;
   }
 
   export interface WelcomeProps {
@@ -34,11 +34,6 @@ declare namespace State {
     addressHash: string;
     officialAccount: Account;
     userAccount: userAccount;
-    aggronExplorerHost: string;
-  }
-
-  export interface ClaimEventListProps {
-    claimEvents: Array<ClaimEventPresenter>;
     aggronExplorerHost: string;
   }
 

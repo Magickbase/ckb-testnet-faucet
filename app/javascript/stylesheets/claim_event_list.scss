@@ -4,6 +4,39 @@
 
 .hash-letter {
   font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
+  color: #9a2cec;
+}
+
+.claim-event-list-container {
+  max-width: 880px;
+  width: 100%;
+  margin-top: 32px;
+  padding: 0 16px;
+}
+
+.claim-event-list-container .heading {
+  width: 100%;
+
+  .query-address {
+    width: 196px;
+  }
+  .title {
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 38px;
+    color: #333333;
+  }
+
+  display: flex;
+  padding: 32px 0;
+  justify-content: space-between;
+}
+
+.query-address::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  background: url("../images/clear.svg");
 }
 
 .claim-event-list-container .card {
@@ -21,7 +54,7 @@
     margin-bottom: 10px;
   }
   a {
-    color: rgb(97, 123, 189);
+    color: #9a2cec;
     text-decoration: none;
   }
   span.timestamp {
