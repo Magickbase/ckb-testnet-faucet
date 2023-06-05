@@ -29,7 +29,7 @@ const ClaimEventForm: React.FC = ({ }) => {
       .matches(/ckt/, "Invalid address")
       .test(
         "remaining",
-        "The amount you claimed are greater than your remaining.",
+        "The amount you claimed cannot be greater than your remaining.",
         (addressHash) => {
           const remaining = remainingRef.current;
 
