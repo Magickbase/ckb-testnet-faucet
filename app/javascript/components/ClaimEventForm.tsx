@@ -46,6 +46,7 @@ const ClaimEventForm: React.FC = ({ }) => {
     errors,
     isSubmitting,
     validateField,
+    setFieldError,
   } = useFormik<FormState>({
     initialValues: {
       addressHash: "",
@@ -57,25 +58,32 @@ const ClaimEventForm: React.FC = ({ }) => {
         "meta[name=csrf-token]"
       );
       const csrfToken = csrfObj ? csrfObj.content : "";
-      await axios({
-        method: "POST",
-        url: "/claim_events",
-        data: {
-          claim_event: {
-            address_hash: values.addressHash,
-            amount: values.amount.toString(),
+      try {
+        await axios({
+          method: "POST",
+          url: "/claim_events",
+          data: {
+            claim_event: {
+              address_hash: values.addressHash,
+              amount: values.amount.toString(),
+            },
           },
-        },
-        headers: {
-          "X-CSRF-Token": csrfToken,
-        },
-      });
-      resetForm();
+          headers: {
+            "X-CSRF-Token": csrfToken,
+          },
+        });
+      } catch (e) {
+        const errorDetail: string | undefined = e?.response?.data?.errors?.[0]["detail"];
+        errorDetail && setFieldError('addressHash', errorDetail);
+        return;
+      }
+      resetForm({ values: { amount: '10000', addressHash: values.addressHash } });
       freshClaimEvents();
+      freshRemaining();
     },
   });
 
-  const { data: remaining } = useUserAddressRemaining(values.addressHash);
+  const { data: remaining, mutate: freshRemaining } = useUserAddressRemaining(values.addressHash);
   addressHashRef.current = values.addressHash;
   remainingRef.current = remaining;
   useEffect(() => {
@@ -107,7 +115,7 @@ const ClaimEventForm: React.FC = ({ }) => {
       <Row className="m-0">
         {!!values.addressHash &&
           !errors.addressHash &&
-          typeof remaining === "number" && (
+          (
             <Form.Group controlId="amount" className="amount-container d-flex">
               <Form.Label className="text-light">
                 <Col className="p-0">Amount</Col>

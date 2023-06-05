@@ -1,7 +1,7 @@
 import React from "react";
 import ClaimEventForm from "./ClaimEventForm";
 import ClaimEventList from "./ClaimEventList";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import CKbIcon from "../images/ckb-n.png";
 import { serverContext } from "../utils/util";
 import { SWRConfig, unstable_serialize } from "swr";
