@@ -217,7 +217,7 @@ const Welcome: React.FC<WelcomeProps> = ({
               xl="5"
               className="justify-content-center content-container"
             >
-              <p>Every address can claim a fixed amount of 300,000 CKB in a month. The claimable amount will monthly update on the first day when you claim on this site.</p>
+              <p>Every address can claim a maximum of 300,000 CKB per calendar month.</p>
             </Col>
           </Row>
           <Row className="justify-content-center align-items-center">
