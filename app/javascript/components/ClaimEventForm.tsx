@@ -26,13 +26,13 @@ const ClaimEventForm: React.FC<ClaimEventFormProps> = ({
     <Form onSubmit={handleSubmit}>
       <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
         <Form.Label column sm={{ span: 2, offset: 1 }}>
-          To Address
+          Send CKB to
         </Form.Label>
         <Col sm="8">
           <FormControl
-            placeholder="Enter your Pudge wallet address"
+            placeholder="Enter your wallet address (ckt...)"
             aria-label="Pudge address"
-            aria-describedby="Enter your Pudge wallet address"
+            aria-describedby="Enter your wallet address"
             name="address_hash"
             value={addressHash}
             onChange={handleInput}
@@ -89,7 +89,7 @@ const ClaimEventForm: React.FC<ClaimEventFormProps> = ({
           <OverlayTrigger
             overlay={
               <Tooltip id="remaining-tooltip">
-                Your claimable amount now for this month is {remaining != null && Number(remaining).toLocaleString("en")} CKB.
+                Your claimable amount for this month is {remaining != null && Number(remaining).toLocaleString("en")} CKB.
               </Tooltip>
             }
           >
